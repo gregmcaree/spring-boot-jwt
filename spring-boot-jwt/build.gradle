@@ -1,0 +1,70 @@
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "http://artifactory.slc.co.uk:8080/artifactory/ext-release-local"
+        }
+        maven {
+            url "http://artifactory.slc.co.uk:8080/artifactory/repo1"
+        }
+        maven {
+            url "http://artifactory.slc.co.uk:8080/artifactory/gradle-libs"
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.10.RELEASE")
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url "http://artifactory.slc.co.uk:8080/artifactory/repo1"
+    }
+    maven {
+        url "http://artifactory.slc.co.uk:8080/artifactory/ext-release-local"
+    }
+    maven {
+        url "http://artifactory.slc.co.uk:8080/artifactory/internal-releases"
+    }
+    maven {
+        url "file:///home/dev/.gradle"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '2.2.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '5.2.1.RELEASE'
+
+    compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.2.1.RELEASE', ext: 'pom'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
