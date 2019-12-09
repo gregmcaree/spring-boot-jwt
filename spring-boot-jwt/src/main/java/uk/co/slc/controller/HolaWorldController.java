@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloWorldController {
-    @RequestMapping({ "/hello" })
-    @PreAuthorize("hasAuthority('ROLE_HELLO')")
+public class HolaWorldController {
+    @RequestMapping({ "/hola" })
+    @PreAuthorize("hasAuthority('ROLE_HOLA')")
     public String firstPage() {
-        return "Hello World";
+        return "Hola World";
     }
 }
